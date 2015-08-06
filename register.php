@@ -26,10 +26,7 @@
 
       <form class="form-signin">
         <h2 class="form-signin-heading" align="center"><b>Create an account: </b></h2>
-        <br>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <br>
+      
 
         <label for="inputUser" class="sr-only">Username</label>
         <input type="text" id="inputUser" class="form-control" placeholder="Username" required autofocus>
@@ -37,8 +34,11 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <br>
+		 <label for="inputPassword" class="sr-only">Confirm Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Confirm Password" required>
+        <br>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
-        <a href="index.html" class="btn btn-lg btn-danger btn-block" type="submit">Cancel</a> <br>
+        <a href="index.php" class="btn btn-lg btn-danger btn-block" type="submit">Home</a> <br>
       </form>
 
     </div> <!-- /container -->

@@ -38,7 +38,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="index.php">Ask OSU</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -49,8 +49,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Classes</a></li>
-                  <li><a href="#">General</a></li>
-                  <li><a href="#">Food (maybe)</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Other</a></li>
                 </ul>
               </li>
               <form class="navbar-form navbar-left" role="search">
@@ -63,8 +63,8 @@
               </form>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="register.html">Register</a></li>
-              <li><a href="login.html">Login</a></li>
+              <li><a href="register.php">Register</a></li>
+              <li><a href="login.php">Login</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

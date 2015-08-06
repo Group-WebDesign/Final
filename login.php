@@ -27,7 +27,7 @@
       <form class="form-signin">
         <h2 class="form-signin-heading" align="center"><b>Welcome back!</b></h2>
         <br>
-        <label for="inputEmail" class="sr-only col-sm-2">Email address</label>
+        <label for="inputEmail" class="sr-only col-sm-2">Username</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <br>
         <label for="inputPassword" class="sr-only col-sm-2">Password</label>
@@ -35,7 +35,7 @@
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <br>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
-        <a href="index.html" class="btn btn-lg btn-danger btn-block" type="submit">Cancel</a>
+        <a href="index.php" class="btn btn-lg btn-danger btn-block" type="submit">Home</a>
       </form>
 
     </div> <!-- /container -->
