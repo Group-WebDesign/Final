@@ -1,47 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<?php
 
-    <title>Signin Template for Bootstrap</title>
+include 'connect.php';
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+$username = $_POST['inputUser'];
+$password = $_POST['inputPassword'];
 
-    <!-- Custom styles for this template -->
-    <link href="login.css" rel="stylesheet">
-
-  </head>
-
-  <body>
-
-    <div class="container">
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading" align="center"><b>Welcome back!</b></h2>
-        <br>
-        <label for="inputEmail" class="sr-only col-sm-2">Username</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <br>
-        <label for="inputPassword" class="sr-only col-sm-2">Password</label>
-        
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <br>
-        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
-        <a href="index.php" class="btn btn-lg btn-danger btn-block" type="submit">Home</a>
-      </form>
-
-    </div> <!-- /container -->
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
+function LogIn() {
+    session_start();
+    if (empty($username) || empty($password)) {
+        echo "Please make sure you fill all the field.";
+        header ("Location: login.html");
+    } else {
+        $query = mysqli_query("SELECT * FROM `mcdoncam-db`.`User` where username = '$username' AND password = '$password'") 
+        or die(mysqli_error()); 
+        $result = mysqli_fetch_array($query) or die(mysqli_error()); 
+        if(!empty($result['username']) AND !empty($result['password'])) { 
+            session_regenerate_id();
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['password'] = $result['password'] 
+            echo "Login Success!";
+            echo '<br> <a href=index2.html> Click here to proceed to the main page.</a>';
+            session_write_close(); 
+        } else { 
+            echo "Sorry, you entered wrong Email AND Password.";
+            echo '<br> <a href=login.html> Click here to retry. </a>'; 
+        }
+    }
+}
