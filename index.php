@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="index.php">Project name</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -45,8 +45,11 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Classes</a></li>
-                  <li><a href="#">General</a></li>
-                  <li><a href="#">Food (maybe)</a></li>
+			        	  <li><a href="#">Events</a></li>
+				          <li><a href="#">Housing</a></li>
+				          <li><a href="#">Food</a></li>
+			        	  <li><a href="#">Directions</a></li>
+                  <li><a href="#">Other</a></li>
                 </ul>
               </li>
               <form class="navbar-form navbar-left" role="search">
@@ -66,23 +69,51 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <div class="row">
-        <div class="col-md-6 col-sm-offset-3">
-        <h2>Custom search field</h2>
-            <div id="custom-search-input">
-                <div class="input-group ">
-                    <input type="text" class="form-control input-lg" placeholder="Type keyword here..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-        </div>
+  <!-- Main component for a primary marketing message or call to action -->
+          <br><br>
+
+    <div class="panel panel-default pull-left">
+      <div class="panel-heading"><font size="5">Most Recent Messages: </font></div>
+      <div class="panel-body">
+      <style>
+      table, th, td {
+           border: 1px solid black;
+           text-align: center;
+      }
+      </style>
+
+      <?php
+      $dbhost = "oniddb.cws.oregonstate.edu";
+      $dbname = "mcdoncam-db";
+      $dbuser = "mcdoncam-db";
+      $dbpass = "xOwqKHjWfOFiJdfA";
+
+      
+      $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+      
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+
+      $sql = "SELECT user, category, content, datecreated, datemodified FROM `mcdoncam-db`.`Message`";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+           echo "<table><tr><th>User</th><th>Category</th><th></th><th>Date Created</th><th>Date Modified</th></tr>";
+           // output data of each row
+           while($row = $result->fetch_assoc()) {
+				
+					echo "<tr><td>" . $row["user"]. "</td><td>" . $row["category"]. "</td><td>". $row["content"]. "</td><td>" . $row["datecreated"]. "</td><td>" . $row["datemodified"]. "</td></tr>";
+					
+			}
+           echo "</table>";
+      } else {
+           echo "0 results";
+      }
+
+
+      ?>  
+      </div>
     </div>
 
     </div> <!-- /container -->
