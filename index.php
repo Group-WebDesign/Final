@@ -90,26 +90,113 @@
 
       
       $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+	  
       
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       } 
+	   if ($conn1->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+	        if ($conn2->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+	  //Thread row
+		$sql = "SELECT id, title, datecreated, category, creatorid, content FROM `mcdoncam-db`.`Thread`";
+		$result = $conn->query($sql);
+		//Message row1
+		$sql1 = "SELECT id, userid, content, datecreated, datemodified, threadid FROM `mcdoncam-db`.`Message`";
+		$result1 = $conn->query($sql1);
+		//User row2
+		$sql2 = "SELECT id, username, joindate, imglink FROM `mcdoncam-db`.`User`";
+		$result2 = $conn->query($sql2);
+	 
+	if ($result->num_rows > 0 ) {
+		$counter = 0;
+		$threadidArray;
+		$threadtitleArray;
+		$threadcreatoridArray;
+		$threadcontentArray;
+		$threadcategoryArray;
+		$threaddatecreatedArray;
+		while($row = $result->fetch_assoc()){
+			
+			 $threadidArray[$counter] =  $row["id"];
+			 $threadtitleArray[$counter] = $row["title"];
+			 $threadcreatoridArray[$counter] = $row["creatorid"];
+			 $threadcontentArray[$counter] = $row["content"];
+			 $threadcategoryArray[$counter] = $row["category"];
+			 $threaddatecreatedArray[$counter] = $row["datecreated"];
+			
+			 $counter++; 
+	
+		}
 
-      $sql = "SELECT user, category, content, datecreated, datemodified FROM `mcdoncam-db`.`Message`";
-      $result = $conn->query($sql);
-
-      if ($result->num_rows > 0) {
-           echo "<table><tr><th>User</th><th>Category</th><th></th><th>Date Created</th><th>Date Modified</th></tr>";
-           // output data of each row
-           while($row = $result->fetch_assoc()) {
-				
-					echo "<tr><td>" . $row["user"]. "</td><td>" . $row["category"]. "</td><td>". $row["content"]. "</td><td>" . $row["datecreated"]. "</td><td>" . $row["datemodified"]. "</td></tr>";
-					
-			}
-           echo "</table>";
-      } else {
-           echo "0 results";
+	} else {
+           echo "0 results: Threads ";
       }
+	if ($result1->num_rows > 0 ) {
+		$counter = 0;
+		$messageidArray;
+		$messagethreadidArray;
+		$messageuseridArray;
+		$messagecontentArray;
+		$messagedatemodifiedArray;
+		$messagedatecreatedArray;
+		while($row1 = $result1->fetch_assoc()){
+			
+			 $messageidArray[$counter] =  $row1["id"];
+			 $messagethreadidArray[$counter] = $row1["threadid"];
+			 $messageuseridArray[$counter] = $row1["userid"];
+			 $messagecontentArray[$counter] = $row1["content"];
+			 $messagedatemodifiedArray[$counter] = $row1["datemodified"];
+			 $messagedatecreatedArray[$counter] = $row1["datecreated"];
+			
+			 $counter++; 
+	
+		}
+
+	} else {
+           echo "0 results: Messages ";
+      }
+	if ($result2->num_rows > 0 ) {
+		$counter = 0;
+		$useridArray;
+		$userusernameArray;
+		$userjoindateArray;
+		$userimglinkArray;
+		while($row2 = $result2->fetch_assoc()){
+			
+			 $useridArray[$counter] =  $row2["id"];
+			 $userusernameArray[$counter] = $row2["username"];
+			 $userjoindateArray[$counter] = $row2["joindate"];
+			 $userimglinkArray[$counter] = $row2["imglink"];
+			
+			 $counter++; 
+	
+		}
+
+	} else {
+           echo "0 results: Users ";
+      }  
+	  
+	  	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
+				echo "<table>";
+				echo "<tr><th>#</th><th>User</th><th>". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
+				echo "<tr>";
+				echo "<td>". $threadidArray[$i]. "</td>";
+				echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
+				echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
+				echo "<td>". $threadcontentArray[$i]. "</td>";
+				echo "<td>". $threadcategoryArray[$i]. "</td>";
+				echo "<td>". $threaddatecreatedArray[$i]. "</td>";
+				echo "</tr>";
+				echo "</table>";
+				
+				echo "<br></br>";
+		}
+	   
+     
 
 
       ?>  
