@@ -1,29 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--This website is inspired from the help of bootstrap template: http://getbootstrap.com/examples/signin/; -->
+
+  <title>AskOregonState</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 <?php
-
+session_start();
 include 'connect.php';
+require 'login.html';
 
-$username = $_POST['inputUser'];
-$password = $_POST['inputPassword'];
+$username = $_POST["username"];
+$password = md5($_POST["password"]);
 
-function LogIn() {
-    session_start();
-    if (empty($username) || empty($password)) {
-        echo "Please make sure you fill all the field.";
-        header ("Location: login.html");
+if (!empty($username) && !empty($password)) {
+    $input = "SELECT id FROM `mcdoncam-db`.`user` WHERE username = '$username' AND password = '$password'";
+    $query = mysqli_query($conn, $input) or die(mysqli_error($conn)); 
+    $count = mysqli_num_rows($query);
+    $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+    if ($count != 0) {
+        $_SESSION["userLogin"] = $row["id"];
+        $_SESSION["username"] = $username;
+        echo "<br><p align=center>Login Success! Welcome, " . $_SESSION["username"]. "!</p><br>";
+        echo '<div class="form-actions"><a href="index2.php" role="button" class="btn btn-lg btn-success"> Click here to proceed to main page</a></div>';
     } else {
-        $query = mysqli_query("SELECT * FROM `mcdoncam-db`.`User` where username = '$username' AND password = '$password'") 
-        or die(mysqli_error()); 
-        $result = mysqli_fetch_array($query) or die(mysqli_error()); 
-        if(!empty($result['username']) AND !empty($result['password'])) { 
-            session_regenerate_id();
-            $_SESSION['username'] = $result['username'];
-            $_SESSION['password'] = $result['password'] 
-            echo "Login Success!";
-            echo '<br> <a href=index2.html> Click here to proceed to the main page.</a>';
-            session_write_close(); 
-        } else { 
-            echo "Sorry, you entered wrong Email AND Password.";
-            echo '<br> <a href=login.html> Click here to retry. </a>'; 
-        }
+        echo "<br><p align=center>Sorry, invalid Email OR Password. </p><br>";
+        echo '<div class="form-actions"><a href="login.html" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
     }
-}
+}    
+
+//Credits to "http://www.9lessons.info/2014/07/ajax-php-login-page.html" for the guidance source.
+
+mysqli_close($conn);
+?>
+<br>
+</body>
+</html>

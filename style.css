@@ -4,6 +4,12 @@ body {
   background-color: #eee;
 }
 
+.form-actions {
+    margin: 0;
+    background-color: transparent;
+    text-align: center;
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
