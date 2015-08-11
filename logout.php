@@ -16,7 +16,7 @@
 session_start();
 session_destroy();
 echo "<br><p align=center>Logout success! </p><br>";
-echo '<div class="form-actions"><a href="index.html" role="button" class="btn btn-lg btn-success"> Click here to continue</a></div>';
+echo '<div class="form-actions"><a href="index.php" role="button" class="btn btn-lg btn-success"> Click here to continue</a></div>';
 ?>
 <br>
 </body>

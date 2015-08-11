@@ -17,8 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
-    <link href="profile.css" rel="stylesheet">
-
+    
   </head>
 
   <body>
@@ -68,33 +67,27 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      Username
-      <div class="container">
-      <li> Questions</li>
-      <li>Replies</li>
-      </div>
-    <div class="container">
-      <form class="form-signin" method="post" action="changepassword.php">
-          <h2 class="form-signin-heading" align="center"><b>Change Your Password: </b></h2>
-              <label for="inputPassword" class="sr-only">Password</label>
-              <input type="text" id="inputPassword" class="form-control" placeholder="Original Password" required autofocus>
-                  <br>
-
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="New Password" required>
-            <label for="inputCPassword" class="sr-only">CPassword</label>
-            <input type="password" id="inputCPassword" class="form-control" placeholder="Confirm New Password" required>
-            <button class="btn btn-lg btn-success btn-block" type="submit">Submit</button>
-        </form>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+        <h2>Custom search field</h2>
+            <div id="custom-search-input">
+                <div class="input-group ">
+                    <input type="text" class="form-control input-lg" placeholder="Type keyword here..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 
-      <button>Upload Profile Pictures</button>
-      <button>Submit</button>
-
     </div> <!-- /container -->
-    
-    
-    
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

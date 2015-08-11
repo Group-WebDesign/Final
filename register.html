@@ -21,22 +21,22 @@
   </head>
 
   <body>
-    <?php include ($register."register.php"); ?>
+
     <div class="container">
 
-      <form class="form-signin" method="post" action="register.php">
+      <form action="register.php" class="form-signin" method="post" role="form">
         <h2 class="form-signin-heading" align="center"><b>Create an account: </b></h2>
         <br>
-        <label for="inputUser">Username</label>
-        <input type="text" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"class="form-control" placeholder="Username" required autofocus>
         <br>
-        <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputCPassword">CPassword</label>
-        <input type="password" id="inputCPassword" class="form-control" placeholder="Confirm Password" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <label for="cpassword">Confirm Password</label>
+        <input type="password" id="cpassword" name="cpassword" class="form-control" placeholder="Confirm Password" required>
         <br>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
-        <a href="index.html" class="btn btn-lg btn-danger btn-block" type="submit">Cancel</a> <br>
+        <a href="index.php" class="btn btn-lg btn-danger btn-block" type="submit">Cancel</a> <br>
       </form>
 
     </div> <!-- /container -->

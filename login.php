@@ -15,13 +15,12 @@
 <?php
 session_start();
 include 'connect.php';
-require 'login.html';
 
 $username = $_POST["username"];
 $password = md5($_POST["password"]);
 
 if (!empty($username) && !empty($password)) {
-    $input = "SELECT id FROM `mcdoncam-db`.`user` WHERE username = '$username' AND password = '$password'";
+    $input = "SELECT id FROM `mcdoncam-db`.`User` WHERE username = '$username' AND password = '$password'";
     $query = mysqli_query($conn, $input) or die(mysqli_error($conn)); 
     $count = mysqli_num_rows($query);
     $row = mysqli_fetch_array($query, MYSQLI_ASSOC);

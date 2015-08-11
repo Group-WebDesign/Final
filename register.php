@@ -14,15 +14,17 @@
 <body>
 <?php
 include 'connect.php';
-require 'register.html';
+
 // If the values are posted, insert them into the database.
-if (isset($_POST['inputUser']) && isset($_POST['inputPassword'])){
-    $username = $_POST['inputUser'];
-    $password = $_POST['inputPassword'];
-    $cpassword = $_POST['inputCPassword'];
-    $date = 'Date("Y/m/d")';
+
+
+if (!empty($_POST["username"]) && !empty($_POST["password"])){
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $cpassword = $_POST["cpassword"];
+    $date = Date("Y/m/d");
     $slquery = "SELECT 1 FROM `mcdoncam-db`.`User` WHERE username = '$username'";
-    $selectresult = mysqli_query($slquery);
+    $selectresult = mysqli_query($conn, $slquery);
     if(mysqli_num_rows($selectresult)>0)
     {
          $errorMessage = '<p align=center>Sorry, but current username already exists.</p>';
@@ -36,17 +38,18 @@ if (isset($_POST['inputUser']) && isset($_POST['inputPassword'])){
     } 
     else{
           $sPassword = md5($password);
-          $query = "INSERT INTO `mcdoncam-db`.`User` (`id`, `username`, `password`, `joindate`, `imageurl`) 
-          VALUES (NULL,'$username', '$sPassword','$date','')";
-          $result = mysqli_query($query);
+          $query = "INSERT INTO `mcdoncam-db`.`User` (id,username,password,joindate,imglink) 
+          VALUES (NULL,'$username','$sPassword','$date','')";
+          $result = mysqli_query($conn,$query);
           if($result){
              $msg = "<p align=center>User Created Successfully.</p>";
              echo $msg . "<br>";
              echo '<div class="form-actions"><a href="login.html" role="button" class="btn btn-lg btn-success"> Click here to login</a></div>';
-
+          } else {
+            echo "Failure!";
           }
     }
-}
+} 
 mysqli_close($conn);
 ?>
 <br>
