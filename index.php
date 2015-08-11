@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Ask OSU</a>
+            <a class="navbar-brand" href="index.php">Project name</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -45,18 +45,18 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Classes</a></li>
-			      <li><a href="#">Events</a></li>
-				  <li><a href="#">Housing</a></li>
-				  <li><a href="#">Food</a></li>
-			      <li><a href="#">Directions</a></li>
+			        	  <li><a href="#">Events</a></li>
+				          <li><a href="#">Housing</a></li>
+				          <li><a href="#">Food</a></li>
+			        	  <li><a href="#">Directions</a></li>
                   <li><a href="#">Other</a></li>
                 </ul>
               </li>
-              <form class="navbar-form navbar-left" role="search">
+              <form class="navbar-form navbar-left" role="search" action="searchbar.php" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search...">
+                  <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
                 </div>
-                <button class="btn btn-info" type="button">
+                <button class="btn btn-info" type="submit">
                   <i class="glyphicon glyphicon-search"></i>
                 </button>
               </form>
@@ -73,7 +73,7 @@
           <br><br>
 
     <div class="panel panel-default pull-left">
-      <div class="panel-heading"><font size="5">Most Recent Threads: </font></div>
+      <div class="panel-heading"><font size="5">Most Recent Messages: </font></div>
       <div class="panel-body">
       <style>
       table, th, td {
@@ -95,7 +95,12 @@
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       } 
-
+	   if ($conn1->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+	        if ($conn2->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
 	  //Thread row
 		$sql = "SELECT id, title, datecreated, category, creatorid, content FROM `mcdoncam-db`.`Thread`";
 		$result = $conn->query($sql);
@@ -107,7 +112,7 @@
 		$result2 = $conn->query($sql2);
 	 
 	if ($result->num_rows > 0 ) {
-		$counter = 1;
+		$counter = 0;
 		$threadidArray;
 		$threadtitleArray;
 		$threadcreatoridArray;
@@ -131,7 +136,7 @@
            echo "0 results: Threads ";
       }
 	if ($result1->num_rows > 0 ) {
-		$counter = 1;
+		$counter = 0;
 		$messageidArray;
 		$messagethreadidArray;
 		$messageuseridArray;
@@ -155,7 +160,7 @@
            echo "0 results: Messages ";
       }
 	if ($result2->num_rows > 0 ) {
-		$counter = 1;
+		$counter = 0;
 		$useridArray;
 		$userusernameArray;
 		$userjoindateArray;
@@ -175,9 +180,9 @@
            echo "0 results: Users ";
       }  
 	  
-	  	for($i =  count($threadidArray)  ; $i > 0; $i-- ){
+	  	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
 				echo "<table>";
-				echo "<tr><th>#</th><th>User</th><th><a href=view.php?threadid=". $threadidArray[$i].">". $threadtitleArray[$i]. "</a></th><th>Category</th><th>Date Created</th></tr>";
+				echo "<tr><th>#</th><th>User</th><th>". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
 				echo "<tr>";
 				echo "<td>". $threadidArray[$i]. "</td>";
 				echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
@@ -187,11 +192,9 @@
 				echo "<td>". $threaddatecreatedArray[$i]. "</td>";
 				echo "</tr>";
 				echo "</table>";
-				echo "<br></br>";
-			
-			}	
 				
-		
+				echo "<br></br>";
+		}
 	   
      
 
