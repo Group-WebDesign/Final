@@ -52,7 +52,7 @@
                   <li><a href="#">Other</a></li>
                 </ul>
               </li>
-              <form class="navbar-form navbar-left" role="search" action="searchbar.php" method="post">
+              <form class="navbar-form navbar-left" role="search" action="searchnon.php" method="post">
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
                 </div>
@@ -181,8 +181,8 @@
       }  
 	  
 	  	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
-				echo "<table>";
-				echo "<tr><th>#</th><th>User</th><th>". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
+				echo "<table border='1' style='width:100%'>";
+				echo "<tr><th>#</th><th>User</th><th>Title:&nbsp". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
 				echo "<tr>";
 				echo "<td>". $threadidArray[$i]. "</td>";
 				echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
