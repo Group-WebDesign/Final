@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -72,9 +72,9 @@
 	<?php
 	include 'connect.php';
 	//$searchtag = explode(" ", $_POST["search"]);
-	$searchtag = trim($_POST["search"]);
+	$searchtag = trim($_GET["category"]);
 	//foreach ($searchtag as $value) {
-	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE title LIKE '%$searchtag%'";		$query = mysqli_query($conn, $sql);
+	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE category LIKE '%$searchtag%'";		$query = mysqli_query($conn, $sql);
 	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
   $count = mysqli_num_rows($query);
   if ($count != 0) {

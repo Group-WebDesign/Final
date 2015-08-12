@@ -44,19 +44,19 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Classes</a></li>
-			      <li><a href="#">Events</a></li>
-				  <li><a href="#">Housing</a></li>
-				  <li><a href="#">Food</a></li>
-			      <li><a href="#">Directions</a></li>
-                  <li><a href="#">Other</a></li>
+						  <li><a href="category.php?category=Classes">Classes</a></li>
+			        	  <li><a href="category.php?category=Events">Events</a></li>
+				          <li><a href="category.php?category=Housing">Housing</a></li>
+				          <li><a href="category.php?category=Food">Food</a></li>
+			        	  <li><a href="category.php?category=Directions">Directions</a></li>
+						  <li><a href="category.php?category=Other">Other</a></li>
                 </ul>
-              </li>
-              <form class="navbar-form navbar-left" role="search">
+               </li>
+              <form class="navbar-form navbar-left" role="search" action="searchnon.php" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search...">
+                  <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
                 </div>
-                <button class="btn btn-info" type="button">
+                <button class="btn btn-info" type="submit">
                   <i class="glyphicon glyphicon-search"></i>
                 </button>
               </form>

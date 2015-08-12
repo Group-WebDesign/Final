@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Project name</a>
+            <a class="navbar-brand" href="index.php">Ask OSU</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -44,12 +44,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Classes</a></li>
-			        	  <li><a href="#">Events</a></li>
-				          <li><a href="#">Housing</a></li>
-				          <li><a href="#">Food</a></li>
-			        	  <li><a href="#">Directions</a></li>
-                  <li><a href="#">Other</a></li>
+						  <li><a href="category.php?category=Classes">Classes</a></li>
+			        	  <li><a href="category.php?category=Events">Events</a></li>
+				          <li><a href="category.php?category=Housing">Housing</a></li>
+				          <li><a href="category.php?category=Food">Food</a></li>
+			        	  <li><a href="category.php?category=Directions">Directions</a></li>
+						  <li><a href="category.php?category=Other">Other</a></li>
                 </ul>
               </li>
               <form class="navbar-form navbar-left" role="search" action="searchnon.php" method="post">
@@ -182,7 +182,7 @@
 	  
 	  	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
 				echo "<table border='1' style='width:100%'>";
-				echo "<tr><th>#</th><th>User</th><th>Title:&nbsp". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
+				echo "<tr><th>#</th><th>User</th><th>Title:&nbsp<a href=view.php?threadid=". $threadidArray[$i] .">". $threadtitleArray[$i]. "</a> </th><th>Category</th><th>Date Created</th></tr>";
 				echo "<tr>";
 				echo "<td>". $threadidArray[$i]. "</td>";
 				echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
