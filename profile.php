@@ -20,7 +20,9 @@
     <link href="profile.css" rel="stylesheet">
 
   </head>
-
+<?php
+    include 'connect.php';
+?>
   <body>
 
     <div class="container">
@@ -68,8 +70,40 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      Username
-      <div class="container">
+
+    <?php
+        //echo username
+        session_start();
+        $_SESSION['username'] = "xian1";
+        echo $_SESSION['username'];
+        //echo difault pic
+        echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
+        if(isset($_POST['submit'])){
+            move_uploaded_file($_FILES['file']['tmp_name'],"pictures/".$_FILES['file']['name']);
+            $q = mysqli_query($conn,"UPDATE User SET imalink = '".$_FILES['file']['name']."' WHERE username = '".$_SESSION['username']."'");
+        }
+    ?>
+    <!-- upload pictures, reference: pastebin.com/vJFUcvka -->
+    <form action="" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" name="submit">
+    </form>
+
+
+    <?php
+        $q = mysqli_query($conn,"SELECT * FROM users");
+        while($row = mysqli_fetch_assoc($q)){
+            echo $row['username'];
+            if($row['image'] == ""){
+                echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
+            } else {
+                echo "<img width='100' height='100' src='pictures/".$row['image']."' alt='Profile Pic'>";
+            }
+            echo "<br>";
+        }
+    ?>
+
+        <div class="container">
       <li> Questions</li>
       <li>Replies</li>
       </div>
@@ -77,7 +111,7 @@
       <form class="form-signin" method="post" action="changepassword.php">
           <h2 class="form-signin-heading" align="center"><b>Change Your Password: </b></h2>
               <label for="inputPassword" class="sr-only">Password</label>
-              <input type="text" id="inputPassword" class="form-control" placeholder="Original Password" required autofocus>
+              <input type="text" id="originalPassword" class="form-control" placeholder="Original Password" required autofocus>
                   <br>
 
             <label for="inputPassword" class="sr-only">Password</label>
@@ -88,12 +122,9 @@
         </form>
     </div>
 
-      <button>Upload Profile Pictures</button>
-      <button>Submit</button>
-
     </div> <!-- /container -->
     
-    
+
     
 
     <!-- Bootstrap core JavaScript
