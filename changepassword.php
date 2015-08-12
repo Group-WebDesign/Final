@@ -31,7 +31,7 @@ $newcpassword = md5($_POST["inputCPassword"]);
         $query = mysqli_query($conn, $input) or die(mysqli_error($conn));
         $count = mysqli_num_rows($query);
         $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-        $sql = "UPDATE User SET password=$newpassword WHERE username=$username";
+        $sql = "UPDATE User SET password="$newpassword" WHERE username="$username;
         
         if (mysqli_query($conn, $sql)) {
             echo "Password updated successfully";

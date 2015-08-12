@@ -80,7 +80,7 @@
         echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
         if(isset($_POST['submit'])){
             move_uploaded_file($_FILES['file']['tmp_name'],"pictures/".$_FILES['file']['name']);
-            $q = mysqli_query($conn,"UPDATE User SET imalink = '".$_FILES['file']['name']."' WHERE username = '".$_SESSION['username']."'");
+            $q = mysqli_query($conn,"UPDATE User SET imglink = '".$_FILES['file']['name']."' WHERE username = '".$_SESSION['username']."'");
         }
     ?>
     <!-- upload pictures, reference: pastebin.com/vJFUcvka -->
@@ -91,13 +91,13 @@
 
 
     <?php
-        $q = mysqli_query($conn,"SELECT * FROM users");
+        $q = mysqli_query($conn,"SELECT * FROM User");
         while($row = mysqli_fetch_assoc($q)){
             echo $row['username'];
-            if($row['image'] == ""){
+            if($row['imglink'] == ""){
                 echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
             } else {
-                echo "<img width='100' height='100' src='pictures/".$row['image']."' alt='Profile Pic'>";
+                echo "<img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'>";
             }
             echo "<br>";
         }
