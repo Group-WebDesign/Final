@@ -16,29 +16,31 @@
 session_start();
 include 'connect.php';
 //get the username
-$username = "xian1";
+$username = $_SESSION["username"];
 $password = md5($_POST["originalPassword"]);
 $newpassword = md5($_POST["inputPassword"]);
 $newcpassword = md5($_POST["inputCPassword"]);
     if ($newcpassword != $newpassword) {
-        echo "you entered your new password incorrectly.";
-        echo '<div class="form-actions"><a href="login.html" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
+        echo "<br><p align=center>You entered your new password incorrectly.</p></br>";
+        echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
         break;
     }
-
-    else if (!empty($newpassword) && !empty($password) && !empty($newcpassword)) {
-        $input = "SELECT id FROM `mcdoncam-db`.`User` WHERE username = '$username' AND password = '$password'";
+    else {
+        $input = "SELECT password FROM `mcdoncam-db`.`User` WHERE username = '$username'";
         $query = mysqli_query($conn, $input) or die(mysqli_error($conn));
         $count = mysqli_num_rows($query);
-        $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
-        $sql = "UPDATE User SET password="$newpassword" WHERE username="$username;
-        
-        if (mysqli_query($conn, $sql)) {
-            echo "Password updated successfully";
-        } else {
-            echo "Error updating passowrd: " . mysqli_error($conn);
-        }
+        if ($count != 0) {
+          $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+          $sql = "UPDATE User SET password = '$newpassword' WHERE username = '$username'";
+          if (mysqli_query($conn, $sql)) {
+            echo "<br><p align=center>Password updated successfully.</p><br>";
+            echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-success"> Click here to retry</a></div>';
+          } else {
+            echo "<br><p align=center>Error updating password. Please try again.</p></br>";
+            echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
 
+          }
+        }
 }
 
 //reference:http://www.w3schools.com/php/php_mysql_update.asp
