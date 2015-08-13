@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,9 +23,7 @@
     <link href="style.css" rel="stylesheet">
 
   </head>
-<?php
-    include 'connect.php';
-?>
+
   <body>
 
     <div class="container">
@@ -47,9 +48,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Classes</a></li>
-                  <li><a href="#">General</a></li>
-                  <li><a href="#">Food (maybe)</a></li>
+                  <li><a href="category.php?category=Classes">Classes</a></li>
+                  <li><a href="category.php?category=Events">Events</a></li>
+                  <li><a href="category.php?category=Housing">Housing</a></li>
+                  <li><a href="category.php?category=Food">Food</a></li>
+                  <li><a href="category.php?category=Directions">Directions</a></li>
+                  <li><a href="category.php?category=Other">Other</a></li>
                 </ul>
               </li>
               <form class="navbar-form navbar-left" role="search" action="searchsess.php" method="post">
@@ -70,12 +74,20 @@
         </div><!--/.container-fluid -->
       </nav>
 
+    <br><br>
+    <div class="col-md-3 pull-left">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">My Post</a></li>
+        <li><a href="#">My Thread</a></li>
+        <li><a href="changepassword.html">Change Password</a></li>
+      </ul>
+    </div>
 
     <?php
         //echo username
-        session_start();
-        $_SESSION['username'] = "xian1";
-        echo $_SESSION['username'];
+        include 'connect.php';
+        
         //echo difault pic
         echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
         if(isset($_POST['submit'])){
@@ -103,26 +115,6 @@
         }
     ?>
 
-        <div class="container">
-      <li> Questions</li>
-      <li>Replies</li>
-      </div>
-    <div class="container">
-      <form class="form-signin" method="post" action="changepassword.php">
-          <h2 class="form-signin-heading" align="center"><b>Change Your Password: </b></h2>
-              <label for="inputPassword" class="sr-only">Password</label>
-              <input type="text" id="originalPassword" class="form-control" placeholder="Original Password" required autofocus>
-                  <br>
-
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="New Password" required>
-            <label for="inputCPassword" class="sr-only">CPassword</label>
-            <input type="password" id="inputCPassword" class="form-control" placeholder="Confirm New Password" required>
-            <button class="btn btn-lg btn-success btn-block" type="submit">Submit</button>
-        </form>
-    </div>
-
-    </div> <!-- /container -->
     
 
     

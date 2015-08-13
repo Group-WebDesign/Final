@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +16,6 @@
 </head>
 <body>
 <?php
-session_start();
 include 'connect.php';
 //get the username
 $username = $_SESSION["username"];
@@ -23,7 +25,6 @@ $newcpassword = md5($_POST["inputCPassword"]);
     if ($newcpassword != $newpassword) {
         echo "<br><p align=center>You entered your new password incorrectly.</p></br>";
         echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
-        break;
     }
     else {
         $input = "SELECT password FROM `mcdoncam-db`.`User` WHERE username = '$username'";
@@ -34,10 +35,10 @@ $newcpassword = md5($_POST["inputCPassword"]);
           $sql = "UPDATE User SET password = '$newpassword' WHERE username = '$username'";
           if (mysqli_query($conn, $sql)) {
             echo "<br><p align=center>Password updated successfully.</p><br>";
-            echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-success"> Click here to retry</a></div>';
+            echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-success"> Click here to continue</a></div>';
           } else {
             echo "<br><p align=center>Error updating password. Please try again.</p></br>";
-            echo '<div class="form-actions"><a href="profile.php" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
+            echo '<div class="form-actions"><a href="changepassword.html" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
 
           }
         }
