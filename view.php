@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,29 +64,35 @@
                 </button>
               </form>
             </ul>
+            <?php 
+            if(!empty($_SESSION["username"])){
+            ?>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="profile.php"><i class="fa fa-user"></i>&nbsp Hello,
+                <b><?php session_start(); echo $_SESSION["username"];?></b></a></li>
+              <li><a href="logout.php">Logout</a></li>
+            </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+            <?php
+            } else {
+            ?>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="register.html">Register</a></li>
               <li><a href="login.html">Login</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </nav>
+      </nav> <?php } ?>
 
   <!-- Main component for a primary marketing message or call to action -->
-          <br><br>
+    <br><br>
 
-    <div class="panel panel-default pull-left">
-      <div class="panel-heading"><font size="5"> </font></div>
-      <div class="panel-body">
-      <style>
-      table, th, td {
-           border: 1px solid black;
-           text-align: center;
-      }
-      </style>
+   	<div class="jumbotron">
+
 
       <?php
-      session_start();
       include 'connect.php';
 
 	  //Thread row
@@ -192,15 +201,18 @@
 					echo "</tr>";
 					echo"</table>";
 					echo "<br></br>";
-				
 				}
-				
 			}
-      ?>  
+      ?> 
+      <br><br>
+      <?php 
+      if(!empty($_SESSION["username"])){
+      	echo '<a href="#" role="button" class="btn btn-sm btn-success pull-left">Reply Message</a>';
+      }
+      ?>
+      <a href="index.php" role="button" class="btn btn-sm btn-danger pull-right">Return to main page</a>
       </div>
-    </div>
 
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

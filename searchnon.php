@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,41 +64,59 @@
                 </button>
               </form>
             </ul>
+            <?php 
+            if(!empty($_SESSION["username"])){
+            ?>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="profile.php"><i class="fa fa-user"></i>&nbsp Hello,
+                <b><?php session_start(); echo $_SESSION["username"];?></b></a></li>
+              <li><a href="logout.php">Logout</a></li>
+            </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+            <?php
+            } else {
+            ?>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="register.html">Register</a></li>
               <li><a href="login.html">Login</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </nav>
-	<div class="jumbotron">
-	<?php
-	include 'connect.php';
-	//$searchtag = explode(" ", $_POST["search"]);
-	$searchtag = trim($_POST["search"]);
-	//foreach ($searchtag as $value) {
-	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE title LIKE '%$searchtag%'";		$query = mysqli_query($conn, $sql);
-	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
-  $count = mysqli_num_rows($query);
-  if ($count != 0) {
-  	echo "<table border='2' style='width:100%'>";
-  	echo "<tr><th align='justify'>Title</th><th align='right'>Category</th><th align='center'>Date</th></tr>";
-  	while ($result = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-      echo "<tr>";
-  		echo "<td align='justify'><a href=view.php?threadid=".$result["id"].">". $result["title"] . "</a></td>";
-      echo "&nbsp &nbsp &nbsp";
-  		echo "<td align='justify'>". $result["category"] . "</td>";
-      echo "&nbsp &nbsp &nbsp";
-  		echo "<td align='justify'>". $result["datecreated"] . "</td>";
-  		echo "</tr>";
-  	}
-  	echo "</table>";
-  	echo "<br></br>";
-  } else {
-    echo "No results found.";
-  }
-	mysqli_close($conn);
-	?>
-	</div>
+      </nav> <?php } ?>
+
+  <br><br>
+	 <div class="jumbotron">
+    
+    	<?php
+    	include 'connect.php';
+    	//$searchtag = explode(" ", $_POST["search"]);
+    	$searchtag = trim($_POST["search"]);
+    	//foreach ($searchtag as $value) {
+    	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE title LIKE '%$searchtag%'";		$query = mysqli_query($conn, $sql);
+    	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
+      $count = mysqli_num_rows($query);
+      if ($count != 0) {
+      	echo "<table border='2' style='width:100%'>";
+      	echo "<tr><th>Title</th><th>Category</th><th>Date</th></tr>";
+      	while ($result = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+          echo "<tr>";
+      		echo "<td><a href=view.php?threadid=".$result["id"].">". $result["title"] . "</a></td>";
+          echo "&nbsp &nbsp &nbsp";
+      		echo "<td>". $result["category"] . "</td>";
+          echo "&nbsp &nbsp &nbsp";
+      		echo "<td>". $result["datecreated"] . "</td>";
+      		echo "</tr>";
+      	}
+      	echo "</table>";
+      	echo "<br></br>";
+      } else {
+        echo "No results found.";
+      }
+    	mysqli_close($conn);
+    	?>
+	   </div>
+
 </body>
 </html>

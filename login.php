@@ -28,7 +28,7 @@ if (!empty($username) && !empty($password)) {
         $_SESSION["userLogin"] = $row["id"];
         $_SESSION["username"] = $username;
         echo "<br><p align=center>Login Success! Welcome, " . $_SESSION["username"]. "!</p><br>";
-        echo '<div class="form-actions"><a href="index2.php" role="button" class="btn btn-lg btn-success"> Click here to proceed to main page</a></div>';
+        echo '<div class="form-actions"><a href="index.php" role="button" class="btn btn-lg btn-success"> Click here to proceed to main page</a></div>';
     } else {
         echo "<br><p align=center>Sorry, invalid Email OR Password. </p><br>";
         echo '<div class="form-actions"><a href="login.html" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';

@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
-    <link href="profile.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 
   </head>
 <?php
@@ -37,7 +37,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="index.php">AskOregonState</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

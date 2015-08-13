@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +37,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Ask OSU</a>
+            <a class="navbar-brand" href="index.php">AskOSU</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -61,13 +64,27 @@
                 </button>
               </form>
             </ul>
+            <?php 
+            if(!empty($_SESSION["username"])){
+           	?>
+           	<ul class="nav navbar-nav navbar-right">
+              <li><a href="profile.php"><i class="fa fa-user"></i>&nbsp Hello,
+                <b><?php session_start(); echo $_SESSION["username"];?></b></a></li>
+              <li><a href="logout.php">Logout</a></li>
+            </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+           	<?php
+           	} else {
+           	?>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="register.html">Register</a></li>
               <li><a href="login.html">Login</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </nav>
+      </nav> <?php } ?>
 
   <!-- Main component for a primary marketing message or call to action -->
     <br><br>
