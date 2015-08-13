@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Ask OSU</a>
+            <a class="navbar-brand" href="index.php">AskOSU</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -70,6 +70,7 @@
       </nav>
 	<div class="jumbotron">
 	<?php
+  session_start();
 	include 'connect.php';
 	//$searchtag = explode(" ", $_POST["search"]);
 	$searchtag = trim($_GET["category"]);

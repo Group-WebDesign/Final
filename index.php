@@ -70,8 +70,7 @@
       </nav>
 
   <!-- Main component for a primary marketing message or call to action -->
-          <br><br>
-
+    <br><br>
     <div class="panel panel-default pull-left">
       <div class="panel-heading"><font size="5">Most Recent Messages: </font></div>
       <div class="panel-body">
@@ -203,7 +202,6 @@
       </div>
     </div>
 
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

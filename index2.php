@@ -68,25 +68,133 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <div class="row">
-        <div class="col-md-6 col-sm-offset-3">
-        <h2>Custom search field</h2>
-            <div id="custom-search-input">
-                <div class="input-group ">
-                    <input type="text" class="form-control input-lg" placeholder="Type keyword here..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
+      <br><br>
+      <div class="panel panel-default pull-left">
+        <div class="panel-heading"><font size="5">Most Recent Messages: </font></div>
+        <div class="panel-body">
+        <style>
+          table, th, td {
+            border: 1px solid black;
+            text-align: center;
+          }
+        </style>
 
-    </div> <!-- /container -->
+      <?php
+      $dbhost = "oniddb.cws.oregonstate.edu";
+      $dbname = "mcdoncam-db";
+      $dbuser = "mcdoncam-db";
+      $dbpass = "xOwqKHjWfOFiJdfA";
+
+      
+      $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    
+      
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+     if ($conn1->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+          if ($conn2->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      } 
+    //Thread row
+    $sql = "SELECT id, title, datecreated, category, creatorid, content FROM `mcdoncam-db`.`Thread`";
+    $result = $conn->query($sql);
+    //Message row1
+    $sql1 = "SELECT id, userid, content, datecreated, datemodified, threadid FROM `mcdoncam-db`.`Message`";
+    $result1 = $conn->query($sql1);
+    //User row2
+    $sql2 = "SELECT id, username, joindate, imglink FROM `mcdoncam-db`.`User`";
+    $result2 = $conn->query($sql2);
+   
+  if ($result->num_rows > 0 ) {
+    $counter = 0;
+    $threadidArray;
+    $threadtitleArray;
+    $threadcreatoridArray;
+    $threadcontentArray;
+    $threadcategoryArray;
+    $threaddatecreatedArray;
+    while($row = $result->fetch_assoc()){
+      
+       $threadidArray[$counter] =  $row["id"];
+       $threadtitleArray[$counter] = $row["title"];
+       $threadcreatoridArray[$counter] = $row["creatorid"];
+       $threadcontentArray[$counter] = $row["content"];
+       $threadcategoryArray[$counter] = $row["category"];
+       $threaddatecreatedArray[$counter] = $row["datecreated"];
+      
+       $counter++; 
+  
+    }
+
+  } else {
+           echo "0 results: Threads ";
+      }
+  if ($result1->num_rows > 0 ) {
+    $counter = 0;
+    $messageidArray;
+    $messagethreadidArray;
+    $messageuseridArray;
+    $messagecontentArray;
+    $messagedatemodifiedArray;
+    $messagedatecreatedArray;
+    while($row1 = $result1->fetch_assoc()){
+      
+       $messageidArray[$counter] =  $row1["id"];
+       $messagethreadidArray[$counter] = $row1["threadid"];
+       $messageuseridArray[$counter] = $row1["userid"];
+       $messagecontentArray[$counter] = $row1["content"];
+       $messagedatemodifiedArray[$counter] = $row1["datemodified"];
+       $messagedatecreatedArray[$counter] = $row1["datecreated"];
+      
+       $counter++; 
+  
+    }
+
+  } else {
+           echo "0 results: Messages ";
+      }
+  if ($result2->num_rows > 0 ) {
+    $counter = 0;
+    $useridArray;
+    $userusernameArray;
+    $userjoindateArray;
+    $userimglinkArray;
+    while($row2 = $result2->fetch_assoc()){
+      
+       $useridArray[$counter] =  $row2["id"];
+       $userusernameArray[$counter] = $row2["username"];
+       $userjoindateArray[$counter] = $row2["joindate"];
+       $userimglinkArray[$counter] = $row2["imglink"];
+      
+       $counter++; 
+  
+    }
+
+  } else {
+           echo "0 results: Users ";
+      }  
+    
+      for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
+        echo "<table border='1' style='width:100%'>";
+        echo "<tr><th>#</th><th>User</th><th>Title:&nbsp<a href=view.php?threadid=". $threadidArray[$i] .">". $threadtitleArray[$i]. "</a> </th><th>Category</th><th>Date Created</th></tr>";
+        echo "<tr>";
+        echo "<td>". $threadidArray[$i]. "</td>";
+        echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
+        echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
+        echo "<td>". $threadcontentArray[$i]. "</td>";
+        echo "<td>". $threadcategoryArray[$i]. "</td>";
+        echo "<td>". $threaddatecreatedArray[$i]. "</td>";
+        echo "</tr>";
+        echo "</table>";
+        
+        echo "<br></br>";
+    }
+    ?>  
+    </div>
+  </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

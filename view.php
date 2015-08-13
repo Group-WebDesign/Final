@@ -83,18 +83,8 @@
       </style>
 
       <?php
-      $dbhost = "oniddb.cws.oregonstate.edu";
-      $dbname = "mcdoncam-db";
-      $dbuser = "mcdoncam-db";
-      $dbpass = "xOwqKHjWfOFiJdfA";
-
-      
-      $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-	  
-      
-      if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-      } 
+      session_start();
+      include 'connect.php';
 
 	  //Thread row
 		$sql = "SELECT id, title, datecreated, category, creatorid, content FROM `mcdoncam-db`.`Thread`";
@@ -176,7 +166,7 @@
       }  
 	  
 			$i = $_GET["threadid"];
-				echo "<table>";
+				echo "<table border='1' style='width:100%'>";
 				echo "<tr><th>#</th><th>User</th><th>". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
 				echo "<tr>";
 				echo "<td>". $threadidArray[$i]. "</td>";
@@ -191,7 +181,7 @@
 
 			for($x = 0; $x <= count($messageidArray); $x++ ){
 				if($messagethreadidArray[$x] == $i){
-					echo "<table>";
+					echo "<table border='1' style='width:100%'>";
 					echo "<tr><th>Reply</th><th>User</th><th></th><th>Date Modified</th><th>Date Created</th></tr>";
 					echo "<tr>";
 					echo "<td></td>";
