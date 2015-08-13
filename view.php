@@ -89,8 +89,9 @@ session_start();
   <!-- Main component for a primary marketing message or call to action -->
     <br><br>
 
-   	<div class="jumbotron">
-
+   	<div class="panel panel-default">
+    	<div class="panel-heading"><h3>Thread:</h3></div>
+    	<div class="panel-body">
 
       <?php
       include 'connect.php';
@@ -175,30 +176,30 @@ session_start();
       }  
 	  
 			$i = $_GET["threadid"];
-				echo "<table border='1' style='width:100%'>";
-				echo "<tr><th>#</th><th>User</th><th>". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr>";
-				echo "<tr>";
+				echo "<div class='table-responsive'><table class='table table-bordered'>";
+				echo "<thead><tr><th>#</th><th>User</th><th>". $threadtitleArray[$i]. "</th><th>Category</th><th>Date Created</th></tr></thead>";
+				echo "<tbody><tr>";
 				echo "<td>". $threadidArray[$i]. "</td>";
 				echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
 				echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
 				echo "<td>". $threadcontentArray[$i]. "</td>";
 				echo "<td>". $threadcategoryArray[$i]. "</td>";
 				echo "<td>". $threaddatecreatedArray[$i]. "</td>";
-				echo "</tr>";
-				echo "</table>";
+				echo "</tr></tbody>";
+				echo "</table></div>";
 				echo "<br></br>";
 
 			for($x = 0; $x <= count($messageidArray); $x++ ){
 				if($messagethreadidArray[$x] == $i){
-					echo "<table border='1' style='width:100%'>";
-					echo "<tr><th>Reply</th><th>User</th><th></th><th>Date Modified</th><th>Date Created</th></tr>";
-					echo "<tr>";
+					echo "<table class='table table-bordered'>";
+					echo "<thead><tr><th>Reply</th><th>User</th><th></th><th>Date Modified</th><th>Date Created</th></tr></thead>";
+					echo "<tbody><tr>";
 					echo "<td></td>";
 					echo "<td>" . $userusernameArray[$messageuseridArray[$x]] . "</td>";
 					echo "<td>" . $messagecontentArray[$x] . "</td>";
 					echo "<td>" . $messagedatemodifiedArray[$x] . "</td>";
 					echo "<td>" . $messagedatecreatedArray[$x] . "</td>";
-					echo "</tr>";
+					echo "</tr></tbody>";
 					echo"</table>";
 					echo "<br></br>";
 				}
@@ -212,6 +213,7 @@ session_start();
       ?>
       <a href="index.php" role="button" class="btn btn-sm btn-danger pull-right">Return to main page</a>
       </div>
+  </div>
 
 
 

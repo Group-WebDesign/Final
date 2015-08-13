@@ -98,12 +98,6 @@ session_start();
       </div>
 
       <div class="panel-body">
-      <style>
-      table, th, td {
-           border: 1px solid black;
-           text-align: center;
-      }
-      </style>
 
       <?php
       $dbhost = "oniddb.cws.oregonstate.edu";
@@ -198,17 +192,17 @@ session_start();
       }  
     	  
     	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
-    		echo "<table border='1' style='width:100%'>";
-    		echo "<tr><th>#</th><th>User</th><th>Title:&nbsp<a href=view.php?threadid=". $threadidArray[$i] .">". $threadtitleArray[$i]. "</a> </th><th>Category</th><th>Date Created</th></tr>";
-    		echo "<tr>";
+    		echo "<div class='table-responsive'><table class='table table-bordered'>";
+    		echo "<thead><tr><th>#</th><th>User</th><th>Title:<a href=view.php?threadid=". $threadidArray[$i] .">". $threadtitleArray[$i]. "</a> </th><th>Category</th><th>Date Created</th></tr></thead>";
+    		echo "<tbody><tr>";
     		echo "<td>". $threadidArray[$i]. "</td>";
     		echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
     		echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
     		echo "<td>". $threadcontentArray[$i]. "</td>";
     		echo "<td>". $threadcategoryArray[$i]. "</td>";
     		echo "<td>". $threaddatecreatedArray[$i]. "</td>";
-    		echo "</tr>";
-    		echo "</table>";
+    		echo "</tr></tbody>";
+    		echo "</table></div>";
     		echo "<br></br>";
     		}
       ?>
