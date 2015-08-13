@@ -12,7 +12,7 @@ session_start();
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>AskOregonState</title>
 
     <!-- Bootstrap  CSS and FontAwesome too -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -37,7 +37,7 @@ session_start();
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">AskOSU</a>
+            <a class="navbar-brand" href="index.php">AskOregonState</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -89,7 +89,14 @@ session_start();
   <!-- Main component for a primary marketing message or call to action -->
     <br><br>
     <div class="panel panel-default pull-left">
-      <div class="panel-heading"><font size="5">Most Recent Messages: </font></div>
+      <div class="panel-heading"><font size="5">Most Recent Messages: </font>
+      <?php 
+      if(!empty($_SESSION["username"])){
+        echo '<a href="#" role="button" class="btn btn-sm btn-success pull-right"><b>Create New Thread</b></a>';
+      }
+      ?>
+      </div>
+
       <div class="panel-body">
       <style>
       table, th, td {
@@ -118,107 +125,102 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
       } 
 	  //Thread row
-		$sql = "SELECT id, title, datecreated, category, creatorid, content FROM `mcdoncam-db`.`Thread`";
-		$result = $conn->query($sql);
-		//Message row1
-		$sql1 = "SELECT id, userid, content, datecreated, datemodified, threadid FROM `mcdoncam-db`.`Message`";
-		$result1 = $conn->query($sql1);
-		//User row2
-		$sql2 = "SELECT id, username, joindate, imglink FROM `mcdoncam-db`.`User`";
-		$result2 = $conn->query($sql2);
+  		$sql = "SELECT id, title, datecreated, category, creatorid, content FROM `mcdoncam-db`.`Thread`";
+  		$result = $conn->query($sql);
+  		//Message row1
+  		$sql1 = "SELECT id, userid, content, datecreated, datemodified, threadid FROM `mcdoncam-db`.`Message`";
+  		$result1 = $conn->query($sql1);
+  		//User row2
+  		$sql2 = "SELECT id, username, joindate, imglink FROM `mcdoncam-db`.`User`";
+  		$result2 = $conn->query($sql2);
 	 
-	if ($result->num_rows > 0 ) {
-		$counter = 0;
-		$threadidArray;
-		$threadtitleArray;
-		$threadcreatoridArray;
-		$threadcontentArray;
-		$threadcategoryArray;
-		$threaddatecreatedArray;
-		while($row = $result->fetch_assoc()){
-			
-			 $threadidArray[$counter] =  $row["id"];
-			 $threadtitleArray[$counter] = $row["title"];
-			 $threadcreatoridArray[$counter] = $row["creatorid"];
-			 $threadcontentArray[$counter] = $row["content"];
-			 $threadcategoryArray[$counter] = $row["category"];
-			 $threaddatecreatedArray[$counter] = $row["datecreated"];
-			
-			 $counter++; 
-	
-		}
+    	if ($result->num_rows > 0 ) {
+    		$counter = 0;
+    		$threadidArray;
+    		$threadtitleArray;
+    		$threadcreatoridArray;
+    		$threadcontentArray;
+    		$threadcategoryArray;
+    		$threaddatecreatedArray;
+    		while($row = $result->fetch_assoc()){
+    			
+    			 $threadidArray[$counter] =  $row["id"];
+    			 $threadtitleArray[$counter] = $row["title"];
+    			 $threadcreatoridArray[$counter] = $row["creatorid"];
+    			 $threadcontentArray[$counter] = $row["content"];
+    			 $threadcategoryArray[$counter] = $row["category"];
+    			 $threaddatecreatedArray[$counter] = $row["datecreated"];
+    			
+    			 $counter++; 
+    	
+    		}
 
-	} else {
-           echo "0 results: Threads ";
+    	} else {
+        echo "0 results: Threads ";
       }
-	if ($result1->num_rows > 0 ) {
-		$counter = 0;
-		$messageidArray;
-		$messagethreadidArray;
-		$messageuseridArray;
-		$messagecontentArray;
-		$messagedatemodifiedArray;
-		$messagedatecreatedArray;
-		while($row1 = $result1->fetch_assoc()){
-			
-			 $messageidArray[$counter] =  $row1["id"];
-			 $messagethreadidArray[$counter] = $row1["threadid"];
-			 $messageuseridArray[$counter] = $row1["userid"];
-			 $messagecontentArray[$counter] = $row1["content"];
-			 $messagedatemodifiedArray[$counter] = $row1["datemodified"];
-			 $messagedatecreatedArray[$counter] = $row1["datecreated"];
-			
-			 $counter++; 
-	
-		}
-
-	} else {
-           echo "0 results: Messages ";
+    	if ($result1->num_rows > 0 ) {
+    		$counter = 0;
+    		$messageidArray;
+    		$messagethreadidArray;
+    		$messageuseridArray;
+    		$messagecontentArray;
+    		$messagedatemodifiedArray;
+    		$messagedatecreatedArray;
+    		while($row1 = $result1->fetch_assoc()){
+    			 $messageidArray[$counter] =  $row1["id"];
+    			 $messagethreadidArray[$counter] = $row1["threadid"];
+    			 $messageuseridArray[$counter] = $row1["userid"];
+    			 $messagecontentArray[$counter] = $row1["content"];
+    			 $messagedatemodifiedArray[$counter] = $row1["datemodified"];
+    			 $messagedatecreatedArray[$counter] = $row1["datecreated"];
+    			
+    			 $counter++; 
+    		}
+    	} else {
+        echo "0 results: Messages ";
       }
-	if ($result2->num_rows > 0 ) {
-		$counter = 0;
-		$useridArray;
-		$userusernameArray;
-		$userjoindateArray;
-		$userimglinkArray;
-		while($row2 = $result2->fetch_assoc()){
-			
-			 $useridArray[$counter] =  $row2["id"];
-			 $userusernameArray[$counter] = $row2["username"];
-			 $userjoindateArray[$counter] = $row2["joindate"];
-			 $userimglinkArray[$counter] = $row2["imglink"];
-			
-			 $counter++; 
-	
-		}
-
-	} else {
-           echo "0 results: Users ";
+    	if ($result2->num_rows > 0 ) {
+    		$counter = 0;
+    		$useridArray;
+    		$userusernameArray;
+    		$userjoindateArray;
+    		$userimglinkArray;
+    		while($row2 = $result2->fetch_assoc()){
+    			 $useridArray[$counter] =  $row2["id"];
+    			 $userusernameArray[$counter] = $row2["username"];
+    			 $userjoindateArray[$counter] = $row2["joindate"];
+    			 $userimglinkArray[$counter] = $row2["imglink"];
+    			
+    			 $counter++; 
+    		}
+    	} else {
+        echo "0 results: Users ";
       }  
-	  
-	  	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
-				echo "<table border='1' style='width:100%'>";
-				echo "<tr><th>#</th><th>User</th><th>Title:&nbsp<a href=view.php?threadid=". $threadidArray[$i] .">". $threadtitleArray[$i]. "</a> </th><th>Category</th><th>Date Created</th></tr>";
-				echo "<tr>";
-				echo "<td>". $threadidArray[$i]. "</td>";
-				echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
-				echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
-				echo "<td>". $threadcontentArray[$i]. "</td>";
-				echo "<td>". $threadcategoryArray[$i]. "</td>";
-				echo "<td>". $threaddatecreatedArray[$i]. "</td>";
-				echo "</tr>";
-				echo "</table>";
-				
-				echo "<br></br>";
-		}
-	   
-     
-
-
-      ?>  
+    	  
+    	for($i =  (count($threadidArray) - 1); $i >= 0; $i-- ){
+    		echo "<table border='1' style='width:100%'>";
+    		echo "<tr><th>#</th><th>User</th><th>Title:&nbsp<a href=view.php?threadid=". $threadidArray[$i] .">". $threadtitleArray[$i]. "</a> </th><th>Category</th><th>Date Created</th></tr>";
+    		echo "<tr>";
+    		echo "<td>". $threadidArray[$i]. "</td>";
+    		echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
+    		echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
+    		echo "<td>". $threadcontentArray[$i]. "</td>";
+    		echo "<td>". $threadcategoryArray[$i]. "</td>";
+    		echo "<td>". $threaddatecreatedArray[$i]. "</td>";
+    		echo "</tr>";
+    		echo "</table>";
+    		echo "<br></br>";
+    		}
+      ?>
+      <br>  
       </div>
     </div>
-
+    <br>
+    <footer align="center">
+        <h4>Template inspired from <a href="http://getbootstrap.com/getting-started/">
+        <img border="0" alt="bootstrap logo" src="http://cnnphilippines.com/static/theme/default/base/ico/apple-touch-icon-144-precomposed.png" width="15" height="15"></h4></a>
+        <h5>&copy Created by Jonathan, Cameron, and Xian</h5>
+      </footer>
 
 
     <!-- Bootstrap core JavaScript
