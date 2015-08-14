@@ -20,12 +20,12 @@ session_start();
 	
 <?php 
 
-$threadid = $_POST["threadid"];
+$threadid = $_SESSION["threadid"];
 include 'connect.php';
 
 // If the values are posted, insert them into the database.
 
-echo $threadid;
+
 if (!empty($_POST['reply'])){
  
     $username = $_SESSION["username"];
