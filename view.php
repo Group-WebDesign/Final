@@ -196,7 +196,7 @@ session_start();
 					echo "<tbody><tr>";
 					echo "<td></td>";
 					echo "<td>" . $userusernameArray[$messageuseridArray[$x]] . "<br>";
-					echo "</br> <p align=center><img width='100' height='100' src='pictures/".$userimglinkArray[$threadcreatoridArray[$i]]."' alt='Profile Pic'></p><br>";				
+					//echo "</br> <p align=center><img width='100' height='100' src='pictures/".$userimglinkArray[$threadcreatoridArray[$i]]."' alt='Profile Pic'></p><br>";				
 
 					echo "</td>";
 					echo "<td>" . $messagecontentArray[$x] . "</td>";
