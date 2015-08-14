@@ -92,7 +92,7 @@ session_start();
       <div class="panel-heading"><font size="5">Most Recent Messages: </font>
       <?php 
       if(!empty($_SESSION["username"])){
-        echo '<a href="#" role="button" class="btn btn-sm btn-success pull-right"><b>Create New Thread</b></a>';
+        echo '<a href="newthread.html" role="button" class="btn btn-sm btn-success pull-right"><b>Create New Thread</b></a>';
       }
       ?>
       </div>
