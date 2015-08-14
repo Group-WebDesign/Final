@@ -33,22 +33,21 @@ session_start();
         <input type="text" id="title" name="title"class="form-control" placeholder="Title" required autofocus>
         <br>
         <label for="content">Content</label>
-        <input type="text" id="content" name="content" class="form-control" placeholder="Content" required>
+        <!--<input type="text" rows="5" id="content" name="content" class="form-control" placeholder="Content" required>-->
+        <br>
+        <textarea class="form-control" rows="5" id="content" name="content" placeholder="Content" required></textarea>
       
 		<br></br>
-                  <select class="form-control" name="category">
-                    <option selected="">--CATEGORIES--</option>
-                    <option value="Classes">Classes</option>
-                    <option value="Events">Events</option>
-                    <option value="Housing">Housing</option>
-                    <option value="Food" name="Food">Food</option>
-                    <option value="Directions">Directions</option>
-                    <option value="Other">Other</option>
-                  </select> 
-
-       
-
-		
+        <select class="form-control" name="category">
+            <option selected="">--CATEGORIES--</option>
+            <option value="Classes">Classes</option>
+            <option value="Events">Events</option>
+            <option value="Housing">Housing</option>
+            <option value="Food" name="Food">Food</option>
+            <option value="Directions">Directions</option>
+            <option value="Other">Other</option>
+        </select> 
+        <br>
         <button class="btn btn-lg btn-success btn-block" type="submit">Post</button>
         <a href="index.php" class="btn btn-lg btn-danger btn-block" type="submit">Cancel</a> <br>
       </form>

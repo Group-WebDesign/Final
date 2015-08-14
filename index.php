@@ -174,7 +174,7 @@ session_start();
         echo "0 results: Messages ";
       }
     	if ($result2->num_rows > 0 ) {
-    		$counter = 1;
+    		$counter = 0;
     		$useridArray;
     		$userusernameArray;
     		$userjoindateArray;

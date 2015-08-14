@@ -1,5 +1,7 @@
 <?php
 session_start();
+    if(!empty($_SESSION["username"])) {
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,6 @@ if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['categ
     $selectresult = mysqli_query($conn, $slquery);
 		$row = $selectresult->fetch_assoc();
        $creatorid = $row["id"];
-		echo $creatorid;
          $query = "INSERT INTO `mcdoncam-db`.`Thread` (id,creatorid,category,title,content,datecreated) 
           VALUES (NULL,'$creatorid','$category','$title','$content','$date')";
 		
@@ -59,3 +60,7 @@ mysqli_close($conn);
 <br>
 </body>
 </html>
+<?php 
+} else {
+    header("Location: login.html");
+} ?>

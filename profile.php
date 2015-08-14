@@ -1,5 +1,6 @@
 <?php
     session_start();
+    if(!empty($_SESSION["username"])) {
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,29 +43,22 @@
 </div>
 <div id="navbar" class="navbar-collapse collapse">
 <ul class="nav navbar-nav">
-<!--<li class="active"><a href="#">About</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">Contact</a></li> -->
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
-<ul class="dropdown-menu">
-<li><a href="category.php?category=Classes">Classes</a></li>
-<li><a href="category.php?category=Events">Events</a></li>
-<li><a href="category.php?category=Housing">Housing</a></li>
-<li><a href="category.php?category=Food">Food</a></li>
-<li><a href="category.php?category=Directions">Directions</a></li>
-<li><a href="category.php?category=Other">Other</a></li>
-</ul>
-</li>
-<form class="navbar-form navbar-left" role="search" action="searchsess.php" method="post">
-<div class="form-group">
-<input type="text" class="form-control" placeholder="Search..." id="search" name="search">
-</div>
-<button class="btn btn-info" type="submit">
-<i class="glyphicon glyphicon-search"></i>
-</button>
-</form>
-</ul>
+<div class="navbar-form form-inline">
+                <form method="post" action="category.php">
+                  <select class="form-control" name="category">
+                    <option selected>--CATEGORIES--</option>
+                    <option value="Classes">Classes</option>
+                    <option value="Events">Events</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Food" name="Food">Food</option>
+                    <option value="Directions">Directions</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <input type="submit" value="submit" name="submit"/>
+                </form>
+              </div>
+            </ul>
+
 <ul class="nav navbar-nav navbar-right">
 <li><a href="profile.php"><i class="fa fa-user"></i>&nbsp Hello,
 <b><?php session_start(); echo $_SESSION["username"];?></b></a></li>
@@ -74,11 +68,19 @@
 </div><!--/.container-fluid -->
 </nav>
 
+<form role="search" action="searchnon.php" method="post">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Title Here..." id="search" name="search">
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+      </div>
+    </form>
+
 <br><br>
 <div class="col-md-3 pull-left">
 <ul class="nav nav-pills nav-stacked">
 <li class="active"><a href="#">Home</a></li>
-<li><a href="#">My Post</a></li>
 <li><a href="mythread.php?">My Thread</a></li>
 <li><a href="changepassword.html">Change Password</a></li>
 </ul>
@@ -100,25 +102,25 @@
     $q = mysqli_query($conn,"SELECT * FROM User WHERE username = '".$_SESSION['username']."'");
     $row = mysqli_fetch_assoc($q);
     if($row['imglink'] == ""){
-        echo "<center>Welcome back ".$_SESSION['username']."!</center>";
+        echo "<p align=center><h3>Welcome back ".$_SESSION['username']."!</h3></p>";
         echo "<br>";
-        echo "<center><img width='100' height='100' src='pictures/default.png' alt='Profile Pic'></center>";
+        echo "<p align=center><img width='100' height='100' src='pictures/default.png' alt='Profile Pic'></p>";
     } else {
-        echo "<center>Welcome back ".$_SESSION['username']."!</center>";
+        echo "<center><p align=center>Welcome back ".$_SESSION['username']."!</p>";
         echo "<br>";
-        echo "<center><img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'></center>";
+        echo "<p align=center><img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'></p>";
     }
     ?>
 <!-- upload pictures, reference: pastebin.com/vJFUcvka -->
-<form action="" method="post" enctype="multipart/form-data">
 <br>
 <br>
 <br>
 
-Change Profile Picture
-<input type="file" name="file">
-<input type="submit" name="submit">
+<form action="" method="post" enctype="multipart/form-data" style="text-align:left">
+    <b>Change Profile Picture </b><input type="file" name="file">
+    <input type="submit" name="submit">
 </form>
+
 
 
 
@@ -133,3 +135,7 @@ Change Profile Picture
 </body>
 
 </html>
+<?php 
+} else {
+    header("Location: login.html");
+} ?>

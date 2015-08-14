@@ -1,5 +1,7 @@
 <?php 
 session_start();
+    if(!empty($_SESSION["username"])) {
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,3 +53,7 @@ mysqli_close($conn);
 <br>
 </body>
 </html>
+<?php 
+} else {
+    header("Location: login.html");
+} ?>
