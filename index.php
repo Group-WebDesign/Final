@@ -92,8 +92,8 @@ session_start();
       <div class="panel-heading"><font size="5">Most Recent Messages: </font>
       <?php 
       if(!empty($_SESSION["username"])){
-        echo '<a href="mythread.php" role="button" class="btn btn-sm btn-danger pull-right"><b>Remove MY Thread</b></a>';
-        echo '&nbsp &nbsp';
+		echo '<a href="mythread.php" role="button" class="btn btn-sm btn-danger pull-right"><b>Remove MY Thread</b></a>';
+		echo '&nbsp &nbsp';
         echo '<a href="newthread.html" role="button" class="btn btn-sm btn-success pull-right"><b>Create New Thread</b></a>';
       }
       ?>

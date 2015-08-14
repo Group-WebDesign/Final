@@ -90,6 +90,11 @@ session_start();
   <br>
 	 <div class="panel panel-default">
     <div class="panel-heading">
+	<a href="deletethread.html" role="button" class="btn btn-sm btn-danger pull-right"><b>Remove MY Thread</b></a>
+
+
+
+
     	<?php
 		$username = $_SESSION['username'];
     	include 'connect.php';
@@ -101,23 +106,13 @@ session_start();
 		   $row = mysqli_fetch_assoc($result);
             
     	//$searchtag = explode(" ", $_POST["search"]);
-    	$searchtag = trim($_POST["search"]);
+    	//$searchtag = trim($_POST["search"]);
       echo "<h3>My thread: </h3>";
       ?> </div>
       <div class="panel-body">
       <?php
     	//foreach ($searchtag as $value) {
 	//foreach ($searchtag as $value) {
-=======
-      <font size="5">My Thread: </font>
-      <a href="deletethread.html" role="button" class="btn btn-sm btn-danger pull-right"><b>Remove A Thread</b></a>
-      </div>
-      <div class="panel-body">
-      <?php
-      include 'connect.php';
-      $q = mysqli_query($conn,"SELECT id FROM User WHERE username = '".$_SESSION['username']."'");
-      $row = mysqli_fetch_assoc($q);
->>>>>>> origin/master
     	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE creatorid=".$row['id']."";
           //$query = mysqli_query($conn, $sql);
     	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
