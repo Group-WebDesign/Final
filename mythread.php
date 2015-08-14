@@ -100,7 +100,7 @@ session_start();
             
     	//$searchtag = explode(" ", $_POST["search"]);
     	$searchtag = trim($_POST["search"]);
-      echo "<h3>My thread: <b>" . $row['id'] . "</b></h3>";
+      echo "<h3>My thread: </h3>";
       ?> </div>
       <div class="panel-body">
       <?php
