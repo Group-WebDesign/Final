@@ -99,8 +99,12 @@
 
 
 <?php
-    $q = mysqli_query($conn,"SELECT * FROM User WHERE username = '".$_SESSION['username']."'");
-    $row = mysqli_fetch_assoc($q);
+	$username = $_SESSION['username'];
+    $q = $conn->prepare("SELECT * FROM User WHERE username = ?");
+	$q->bind_param("s", $username);
+	$q->execute();
+	$selectresult = mysqli_stmt_get_result($q);
+    $row = mysqli_fetch_assoc($selectresult);
     if($row['imglink'] == ""){
         echo "<p align=center><h3>Welcome back ".$_SESSION['username']."!</h3></p>";
         echo "<br>";

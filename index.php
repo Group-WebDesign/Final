@@ -100,10 +100,7 @@ session_start();
       <div class="panel-body">
 
       <?php
-      $dbhost = "oniddb.cws.oregonstate.edu";
-      $dbname = "mcdoncam-db";
-      $dbuser = "mcdoncam-db";
-      $dbpass = "xOwqKHjWfOFiJdfA";
+include 'connect.php';
 
       
       $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -197,8 +194,9 @@ session_start();
     		echo "<tbody><tr>";
     		echo "<td>". $threadidArray[$i]. "</td>";
     		echo "<td>". $userusernameArray[$threadcreatoridArray[$i]]. "<br>";
-    		echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";
-    		echo "<td>". $threadcontentArray[$i]. "</td>";
+			echo "</br> <p align=center><img width='100' height='100' src='pictures/".$userimglinkArray[$threadcreatoridArray[$i]]."' alt='Profile Pic'></p><br>";				
+			echo "</br> Joined:" . $userjoindateArray[$threadcreatoridArray[$i]]. "</td>";   		
+			echo "<td>". $threadcontentArray[$i]. "</td>";
     		echo "<td>". $threadcategoryArray[$i]. "</td>";
     		echo "<td>". $threaddatecreatedArray[$i]. "</td>";
     		echo "</tr></tbody>";

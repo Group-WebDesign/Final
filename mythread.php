@@ -95,10 +95,14 @@ session_start();
 
 
     	<?php
+		$username = $_SESSION['username'];
     	include 'connect.php';
             //connecting to the database table User to get the id
-            $q = mysqli_query($conn,"SELECT id FROM User WHERE username = '".$_SESSION['username']."'");
-            $row = mysqli_fetch_assoc($q);
+            $q = $conn->prepare("SELECT id FROM User WHERE username = ?");
+			$q->bind_param("s", $username);
+			$q->execute();
+			$result = mysqli_stmt_get_result($q);
+		   $row = mysqli_fetch_assoc($result);
             
     	//$searchtag = explode(" ", $_POST["search"]);
     	$searchtag = trim($_POST["search"]);
@@ -107,8 +111,9 @@ session_start();
       <div class="panel-body">
       <?php
     	//foreach ($searchtag as $value) {
+	//foreach ($searchtag as $value) {
     	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE creatorid=".$row['id']."";
-          $query = mysqli_query($conn, $sql);
+          //$query = mysqli_query($conn, $sql);
     	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
       $count = mysqli_num_rows($query);
       if ($count != 0) {

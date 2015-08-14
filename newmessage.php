@@ -27,7 +27,7 @@ include 'connect.php';
 
 // If the values are posted, insert them into the database.
 
-
+$null = null;
 if (!empty($_POST['reply'])){
  
     $username = $_SESSION["username"];
@@ -35,23 +35,28 @@ if (!empty($_POST['reply'])){
   
     $date = Date("Y/m/d");
    
-    $slquery = "SELECT id FROM `mcdoncam-db`.`User` WHERE username = '$username'";
-    $selectresult = mysqli_query($conn, $slquery);
-		$row = $selectresult->fetch_assoc();
+    $stmt = $conn->prepare("SELECT id FROM `mcdoncam-db`.`User` WHERE username = ?");
+    $stmt->bind_param("s", $username);
+	$stmt->execute();
+	$selectresult = mysqli_stmt_get_result($stmt);
+	//$selectresult = mysqli_query($conn, $slquery);
+		$row = mysqli_fetch_assoc($selectresult);
        $creatorid = $row["id"];
 		
-         $query = "INSERT INTO `mcdoncam-db`.`Message` (id,userid,threadid,content,datecreated, datemodified) 
-          VALUES (NULL,'$creatorid', '$threadid', '$reply','$date', '$date')";
 		
-		  $result = mysqli_query($conn,$query);
+         $query = $conn->prepare("INSERT INTO `mcdoncam-db`.`Message` (id, userid,threadid,content,datecreated, datemodified) 
+          VALUES (?, ?, ?, ?, ?, ?)");
+		$query->bind_param("siisss", $null, $creatorid, $threadid, $reply, $date, $date);
+		$query->execute();
 		
-          if($result){
+		  $result = mysqli_stmt_get_result($query);
+		  $row1 = mysqli_fetch_assoc($result);
+		
+
              $msg = "<p align=center>Reply Created Successfully.</p>";
              echo $msg . "<br>";
              echo '<div class="form-actions"><a href="index.php" role="button" class="btn btn-lg btn-success"> Click here to return to the main page</a></div>';
-          } else{
-            echo "Failure!";
-          }
+
 		
     } 
  
