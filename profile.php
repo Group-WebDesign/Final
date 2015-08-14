@@ -103,8 +103,8 @@ session_start();
 
 
     <?php
-        $q = mysqli_query($conn,"SELECT * FROM User");
-        while($row = mysqli_fetch_assoc($q)){
+        $q = mysqli_query($conn,"SELECT * FROM User WHERE username = '".$_SESSION['username']."'");
+        /*while($row = mysqli_fetch_assoc($q)){
             echo $row['username'];
             if($row['imglink'] == ""){
                 echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
@@ -112,12 +112,19 @@ session_start();
                 echo "<img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'>";
             }
             echo "<br>";
+        }*/
+        $row = mysqli_fetch_assoc($q);
+        if($row['imglink'] == ""){
+            echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
+        } else {
+            echo $_SESSION['username'];
+            echo "<img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'>";
         }
     ?>
 
-    
 
-    
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
