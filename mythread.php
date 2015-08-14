@@ -90,11 +90,6 @@ session_start();
   <br>
 	 <div class="panel panel-default">
     <div class="panel-heading">
-<<<<<<< HEAD
-
-
-
-
     	<?php
 		$username = $_SESSION['username'];
     	include 'connect.php';
