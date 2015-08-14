@@ -23,7 +23,7 @@ $threadname = $_POST["threadname"];
 if (!empty ($_POST["threadname"])) {
   $q = mysqli_query($conn,"SELECT id FROM User WHERE username = '".$_SESSION['username']."'");
   $row = mysqli_fetch_assoc($q);
-  $delete = "DELETE FROM `mcdoncam-db`.`Thread` WHERE title = '$threadname' AND creatorid=".$row['id']."";
+  $delete = "UPDATE Thread SET content = '<b>THREAD DELETED!</b>' WHERE title = '$threadname' AND creatorid=".$row['id']."";
   if (mysqli_query($conn,$delete)) {
     echo "<br><p align=center>Thread deleted successfully! " . $_SESSION["username"]. "!</p><br>";
     echo '<div class="form-actions"><a href="mythread.php" role="button" class="btn btn-lg btn-success"> Click here to proceed to continue</a></div>';
@@ -31,10 +31,7 @@ if (!empty ($_POST["threadname"])) {
       echo "<br><p align=center> Sorry, error deleting record: invalid thread title </p><br>";
       echo '<div class="form-actions"><a href="deletethread.html" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
       }
-} else {
-  echo "BOOM";
-  echo '<div class="form-actions"><a href="deletethread.html" role="button" class="btn btn-lg btn-danger"> Click here to retry</a></div>';
-}   
+} 
 //http://www.w3schools.com/php/php_mysql_delete.asp
 mysqli_close($conn);
 ?>
