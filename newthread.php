@@ -26,8 +26,8 @@ include 'connect.php';
 // If the values are posted, insert them into the database.
 
 
-if (!empty($_POST["title"]) && !empty($_POST["content"] && !empty($_POST["category"]))){
-	echo 
+if (!empty($_POST["title"]) && !empty($_POST["content"]) && !empty($_POST["category"])){
+
     $username = $_SESSION["username"];
 	$title = $_POST["title"];
     $content = $_POST["content"];
@@ -37,7 +37,7 @@ if (!empty($_POST["title"]) && !empty($_POST["content"] && !empty($_POST["catego
     $slquery = "SELECT 1 FROM `mcdoncam-db`.`User` WHERE username = '$username'";
     $selectresult = mysqli_query($conn, $slquery);
        $creatorid = $selectresult["id"];
-	   echo $creatorid;
+	   
          $query = "INSERT INTO `mcdoncam-db`.`Thread` (id,creatorid,category,title,content,datecreated) 
           VALUES (NULL,'$creatorid','$category','$title','$content','$date')";
           $result = mysqli_query($conn,$query);
@@ -45,7 +45,7 @@ if (!empty($_POST["title"]) && !empty($_POST["content"] && !empty($_POST["catego
              $msg = "<p align=center>Thread Created Successfully.</p>";
              echo $msg . "<br>";
              echo '<div class="form-actions"><a href="index.php" role="button" class="btn btn-lg btn-success"> Click here to return to the main page</a></div>';
-          } elseif($result == false){
+          } else{
             echo "Failure!";
           }
     } 
