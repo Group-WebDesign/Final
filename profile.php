@@ -94,24 +94,31 @@
         $q = mysqli_query($conn,"UPDATE User SET imglink = '".$_FILES['file']['name']."' WHERE username = '".$_SESSION['username']."'");
     }
     ?>
-<!-- upload pictures, reference: pastebin.com/vJFUcvka -->
-<form action="" method="post" enctype="multipart/form-data">
-<input type="file" name="file">
-<input type="submit" name="submit">
-</form>
 
 
 <?php
     $q = mysqli_query($conn,"SELECT * FROM User WHERE username = '".$_SESSION['username']."'");
     $row = mysqli_fetch_assoc($q);
     if($row['imglink'] == ""){
-        echo $_SESSION['username'];
+        echo "Welcome back ".$_SESSION['username']."!";
+        echo "<br>";
         echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
     } else {
-        echo $_SESSION['username'];
-        echo "<img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'>";
+        echo "<center>Welcome back ".$_SESSION['username']."!</center>";
+        echo "<br>";
+        echo "<center><img width='100' height='100' src='pictures/".$row['imglink']."' alt='Profile Pic'></center>";
     }
     ?>
+<!-- upload pictures, reference: pastebin.com/vJFUcvka -->
+<form action="" method="post" enctype="multipart/form-data">
+<br>
+<br>
+<br>
+
+Change Profile Picture
+<input type="file" name="file">
+<input type="submit" name="submit">
+</form>
 
 
 

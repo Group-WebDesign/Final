@@ -105,7 +105,8 @@ session_start();
       <div class="panel-body">
       <?php
     	//foreach ($searchtag as $value) {
-    	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE creatorid='".$row['id']."'";		$query = mysqli_query($conn, $sql);
+    	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE creatorid=".$row['id']."";
+          $query = mysqli_query($conn, $sql);
     	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
       $count = mysqli_num_rows($query);
       if ($count != 0) {
