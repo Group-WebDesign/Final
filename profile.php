@@ -100,9 +100,9 @@
     $q = mysqli_query($conn,"SELECT * FROM User WHERE username = '".$_SESSION['username']."'");
     $row = mysqli_fetch_assoc($q);
     if($row['imglink'] == ""){
-        echo "Welcome back ".$_SESSION['username']."!";
+        echo "<center>Welcome back ".$_SESSION['username']."!</center>";
         echo "<br>";
-        echo "<img width='100' height='100' src='pictures/default.png' alt='Default Profile Pic'>";
+        echo "<center><img width='100' height='100' src='pictures/default.png' alt='Profile Pic'></center>";
     } else {
         echo "<center>Welcome back ".$_SESSION['username']."!</center>";
         echo "<br>";
