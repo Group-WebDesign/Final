@@ -206,8 +206,9 @@ session_start();
       ?> 
       <br><br>
       <?php 
+	  $threadid = $_GET["threadid"];
       if(!empty($_SESSION["username"])){
-      	echo '<a href="#" role="button" class="btn btn-sm btn-success pull-left">Reply Message</a>';
+      	echo '<a href="newmessage.html?threadid=' . $threadid . '" role="button" class="btn btn-sm btn-success pull-left">Reply Message</a>';
       }
       ?>
       <a href="index.php" role="button" class="btn btn-sm btn-danger pull-right">Return to main page</a>

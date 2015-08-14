@@ -26,21 +26,24 @@ include 'connect.php';
 // If the values are posted, insert them into the database.
 
 
-if (!empty($_POST["title"]) && !empty($_POST["content"]) && !empty($_POST["category"])){
-
+if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['category'])){
+ 
     $username = $_SESSION["username"];
 	$title = $_POST["title"];
     $content = $_POST["content"];
 	$category = $_POST["category"];
     $date = Date("Y/m/d");
    
-    $slquery = "SELECT 1 FROM `mcdoncam-db`.`User` WHERE username = '$username'";
+    $slquery = "SELECT id FROM `mcdoncam-db`.`User` WHERE username = '$username'";
     $selectresult = mysqli_query($conn, $slquery);
-       $creatorid = $selectresult["id"];
-	   
+		$row = $selectresult->fetch_assoc();
+       $creatorid = $row["id"];
+		echo $creatorid;
          $query = "INSERT INTO `mcdoncam-db`.`Thread` (id,creatorid,category,title,content,datecreated) 
           VALUES (NULL,'$creatorid','$category','$title','$content','$date')";
-          $result = mysqli_query($conn,$query);
+		
+		  $result = mysqli_query($conn,$query);
+		
           if($result){
              $msg = "<p align=center>Thread Created Successfully.</p>";
              echo $msg . "<br>";
@@ -48,6 +51,7 @@ if (!empty($_POST["title"]) && !empty($_POST["content"]) && !empty($_POST["categ
           } else{
             echo "Failure!";
           }
+		
     } 
  
 mysqli_close($conn); 
