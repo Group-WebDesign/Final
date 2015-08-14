@@ -41,28 +41,20 @@ session_start();
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <!--<li class="active"><a href="#">About</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li> -->
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-						  <li><a href="category.php?category=Classes">Classes</a></li>
-			        	  <li><a href="category.php?category=Events">Events</a></li>
-				          <li><a href="category.php?category=Housing">Housing</a></li>
-				          <li><a href="category.php?category=Food">Food</a></li>
-			        	  <li><a href="category.php?category=Directions">Directions</a></li>
-						  <li><a href="category.php?category=Other">Other</a></li>
-                </ul>
-              </li>
-              <form class="navbar-form navbar-left" role="search" action="searchnon.php" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
-                </div>
-                <button class="btn btn-info" type="submit">
-                  <i class="glyphicon glyphicon-search"></i>
-                </button>
-              </form>
+              <div class="navbar-form form-inline">
+                <form method="post" action="category.php">
+                  <select class="form-control" name="category">
+                    <option selected>--CATEGORIES--</option>
+                    <option value="Classes">Classes</option>
+                    <option value="Events">Events</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Food" name="Food">Food</option>
+                    <option value="Directions">Directions</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <input type="submit" value="submit" name="submit"/>
+                </form>
+              </div>
             </ul>
             <?php 
             if(!empty($_SESSION["username"])){
@@ -85,18 +77,28 @@ session_start();
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav> <?php } ?>
+  <form role="search" action="searchnon.php" method="post">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Title Here..." id="search" name="search">
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+      </div>
+    </form>
 
-  <br><br>
+  <br>
 	<div class="panel panel-default">
     <div class="panel-heading">
       <?php
       include 'connect.php';
-      $searchtag = trim($_GET["category"]);
-      echo '<h3>Category: <b>' . $searchtag . "</b></h3>";
+      if (!empty($_POST['submit'])) {
+        $searchtag = $_POST['category'];
+        echo '<h3>Category: <b>' . $searchtag . "</b></h3>";
+      }
       ?></div>
     <div class="panel-body">
 	<?php
-	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE category LIKE '%$searchtag%'";		$query = mysqli_query($conn, $sql);
+	$input = "SELECT id, title, category, datecreated FROM `mcdoncam-db`.`Thread` WHERE category = '$searchtag'";
 	$query = mysqli_query($conn, $input) or die(mysqli_error($conn));
   $count = mysqli_num_rows($query);
   if ($count != 0) {
