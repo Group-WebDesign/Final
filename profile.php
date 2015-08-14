@@ -79,14 +79,13 @@
 <ul class="nav nav-pills nav-stacked">
 <li class="active"><a href="#">Home</a></li>
 <li><a href="#">My Post</a></li>
-<li><a href="#">My Thread</a></li>
+<li><a href="mythread.php?">My Thread</a></li>
 <li><a href="changepassword.html">Change Password</a></li>
 </ul>
 </div>
 
 <?php
     include 'connect.php';
-    rename("/pictures/1.png", "/pictures/2.png");
     if(isset($_POST['submit'])){
         move_uploaded_file($_FILES['file']['tmp_name'],"pictures/".$_FILES['file']['name']);
         //use rename to solve pics conflict.
